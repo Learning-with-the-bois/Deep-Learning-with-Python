@@ -41,3 +41,7 @@ train_labels = to_categorical(train_labels)
 test_labels = to_categorical(test_labels)
 # =================================== #
 
+# ==== TRAINING LOOP ==== #
+# The network iterates in mini-batches of 128 samples, 5 times over
+# Each iteration over all the training data is called an epoch
+network.fit(train_images,train_labels, epochs=5,batch_size=128)
