@@ -119,7 +119,6 @@ z=np.dot(x,y)
 
 To understand dot-product shape compatibility, it helps to visualize the input and output tensors by aligning them.
 
-
 ![1678416608774](image\Notes\1678416608774.png)
 
 ### Tensor reshaping
@@ -203,6 +202,7 @@ while loss > 0.01: # Optimization loop
 ### Backpropagation
 
 Starts with the final loss value and works backward from thetop layers to the botton layers, applying the *chain rule* to compute the contribution that each parameter had in the loss value.
+
 
 
 # 3. Getting started with neural networks
