@@ -1,4 +1,6 @@
-# 2.1 Concepts
+# 2. Mathematical building blocks of neural networks
+
+## 2.1 Concepts
 
 **Layers:** Data processing module that you can think as a filter for data. They extract *representations* out of data fed to them.
 
@@ -12,9 +14,9 @@
 
 **Overfitting:** The fact that machine-learning models tend to perform worse on new data than on their training data.
 
-# 2.2 Data representations for neural networks
+## 2.2 Data representations for neural networks
 
-## Tensors
+### Tensors
 
 Container of data (almost always numerical). Generalization of matrices to an arbitrary number of dimentions.
 
@@ -39,7 +41,7 @@ Container of data (almost always numerical). Generalization of matrices to an ar
 
 **Dimensionality:** Can denote either the number of entries along a specific axis or the number of axes in a tensor.
 
-### Key atributes
+#### Key atributes
 
 A tensor is defined by 3 key attributes:
 
@@ -62,7 +64,7 @@ A tensor is defined by 3 key attributes:
   uint8
   ```
 
-### Manipulating tensors in Numpy
+#### Manipulating tensors in Numpy
 
 **Tensor slicing:** Selecting a range of data in a tensor.
 
@@ -76,14 +78,14 @@ In general, you may select between any two indices along each tensor axis.
 my_slice = train_images[:, 14:, 14:]
 ```
 
-### Data batches
+#### Data batches
 
 Deep-learning models don’t process an entire dataset at once; rather,
 they break the data into small batches.
 
 When considering a batch tensor, the first axis (axis 0) is called the **batch axis** or **batch dimension**.
 
-# 2.3 Tensor operations
+## 2.3 Tensor operations
 
 Layers can be interpreted as a function like this:
 
@@ -91,7 +93,7 @@ Layers can be interpreted as a function like this:
 output = relu(dot(W, input) + b)
 ```
 
-## **Element-wise operations**
+### **Element-wise operations**
 
 Operations that are applied independently to each entry in the tensors being considered. Highly optimized.
 
@@ -106,7 +108,7 @@ z = np.maximum(z, 0.) #Element-wise relu
 1. Axes (called broadcast axes) are added to the smaller tensor to match the ndim of the larger tensor.
 2. The smaller tensor is repeated alongside these new axes to match the full shape of the larger tensor
 
-## Tensor dot
+### Tensor dot
 
 Most useful. It combines entries in the input tensors.
 
@@ -117,9 +119,10 @@ z=np.dot(x,y)
 
 To understand dot-product shape compatibility, it helps to visualize the input and output tensors by aligning them.
 
-![1678416608774](image\2.Mathematicalbuildingblocksofneuralnetworks\1678416608774.png)
 
-## Tensor reshaping
+![1678416608774](image\Notes\1678416608774.png)
+
+### Tensor reshaping
 
 Reshaping a tensor means rearranging its rows and columns to match a target shape.
 Naturally, the reshaped tensor has the same total number of coefficients as the initial tensor.
@@ -130,7 +133,7 @@ x = x.reshape((x,y,...))
 
 **Transposition:** Exchanging rows and columns.
 
-# 2.4 Gradient-based optimization
+## 2.4 Gradient-based optimization
 
 Each neural layer transforms input data as follows:
 
@@ -142,14 +145,14 @@ output = relu(dot(W, input) + b)
 
 **Random initialization:** Fil the initial weights with small random numbers.
 
-## Training loop
+### Training loop
 
 1. Draw a batch of training samples *x* and corresponding targets `y`.
 2. Run the network on `x` to obtain predictions `y_pred`.
 3. Compute the loss of the networks on the batch. Measure the mismatch between `y_pred` and `y`.
 4. Update all the weights of the network in a way that slightly reduces the loss on this batch.
 
-## Gradient
+### Gradient
 
 Is the derivative of a tensor operation.
 
@@ -165,9 +168,9 @@ The derivative of `f` in the point `W` is a tensor `gradient(f)(W)`, where each 
 
 You can reduce the value of `f(W)` by moving `W` in the opposite direction from the gradient. For example, `W1 = W0 - step * gradient(f)(W0)` (where `step` is a small scaling factor).
 
-![1679175493660](image/2.Mathematicalbuildingblocksofneuralnetworks/1679175493660.png)
+![1679175493660](image\Notes\1679175493660.png)
 
-## Stochastic gradient descent
+### Stochastic gradient descent
 
 If you update the weigths in the opposite direction from the gradient, the loss will be a little less every time. The step 4 can be efficiently implemented as:
 
@@ -180,7 +183,7 @@ This is called *mini-batch stochastic gradient descent.*
 
 The **step** can't be too *small* or it will take too many iterations or bestuck in local minimum. It can't be too *large* or the updates may be too random.
 
-### Momentum
+#### Momentum
 
 A useful mental image here is to think of the optimization process as a small ball rolling down the loss curve. If it has enough momentum, the ball won’t get stuck in a ravine and will end up at the global minimum.
 
@@ -197,6 +200,45 @@ while loss > 0.01: # Optimization loop
 	update_parameter(w)
 ```
 
-## Backpropagation
+### Backpropagation
 
 Starts with the final loss value and works backward from thetop layers to the botton layers, applying the *chain rule* to compute the contribution that each parameter had in the loss value.
+
+
+# 3. Getting started with neural networks
+
+## 3.1 Anatomy of a neural network
+
+Training a neural network revolves around:
+
+* **Layers**, which are combined into a **network**.
+* The **input data** and corresponding **targets**.
+* The **loss function**, which defines the feedback signal used for learning.
+* The **optimizer**, which dtermines how learning proceeds
+
+![1679189190342](image\Notes\1679189190342.png)
+
+### Layers
+
+A **layer** is a data-processing module that takes as input one or more tensors and outputs one or more tensors.
+
+Different layers are appropiate for different tensor formarts and different types of data processing
+
+* Simple vector data, 2D shape -> **densely connected layers**
+* Sequence data, 3D shape -> **recurrent layers**
+* Image data, 4D shape -> **2D convolution layers**
+
+Building deep-learning models is done by clipping together compatible layers to form userful data-transformation pipelines.
+
+**Layer compatibility** refers specifically to the fact that every layer will only accept input tensors of a certain shape and will return output tensors of a certain shape.
+
+### Models
+
+A **model** is a directed, acyclic graph of layers.
+
+There are many topologies:
+
+* Linear stack of layers (most common)
+* Two-branch networks
+* Multihead networks
+* Inception blocks
