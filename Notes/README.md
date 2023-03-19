@@ -242,3 +242,10 @@ There are many topologies:
 * Inception blocks
 
 By choosing a topology, you constrain your **space of possibilities** to a specific series of tensor operations, mapping the input data to output data.
+
+### Loss functions and optimizers
+
+Once the architecture is defined, you will have to choose 2 more things:
+
+* **Loss function:** Quantity that will be minimized during training. Measure of success of the task.
+* **Optimizer:** Determines howthe networkwill be updated based on the loss function. Implements a specific variant of [stochastic gradient descent](#stochastic-gradient-descent).
