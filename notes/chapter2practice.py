@@ -35,3 +35,9 @@ network.compile(optimizer='rmsprop',
                 metrics=['accuracy'])
 
 
+# =================================== #
+from keras.utils import to_categorical
+train_labels = to_categorical(train_labels)
+test_labels = to_categorical(test_labels)
+# =================================== #
+
