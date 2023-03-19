@@ -240,3 +240,5 @@ There are many topologies:
 * Two-branch networks
 * Multihead networks
 * Inception blocks
+
+By choosing a topology, you constrain your **space of possibilities** to a specific series of tensor operations, mapping the input data to output data.
