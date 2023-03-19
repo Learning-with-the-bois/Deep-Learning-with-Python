@@ -1,4 +1,4 @@
-# LOADING THE MNIST DATASET IN KERAS
+# ==== LOADING THE MNIST DATASET IN KERAS ==== #
 from keras.datasets import mnist
 
 (train_images, train_labels),(test_images, test_labels) = mnist.load_data()
@@ -12,15 +12,24 @@ test_images = test_images.astype('float32') / 255
 
 
 
-# BUILDING THE NETWORK ARCHITECTURE
+# ==== BUILDING THE NETWORK ARCHITECTURE====#
 from keras import models
 from keras import layers
 
 network = models.Sequential()
 # The networkconsits of a chain of two Dense layers,each one with itsown weights
 # W0, with relu activation function and a input shape of 28*28
-network.add(layers.Dense(512, activation='relu',input_shape=(28*28,)))
+network.add(layers.Dense(512, 
+                         activation='relu',input_shape=(28*28,)))
 # W1,with softmax activation function. Output of vector of 10 probability scores
-network.add(layers.Dense(10,activation='softmax'))
+network.add(layers.Dense(10,
+                         activation='softmax'))
 
+
+# ==== COMPILATION ==== #
+# "categorycal_crossentropy" is the loss function that's used as a feedback signal for learning the weight tensors, andwhich the training phase will attempt to minimize.
+# "rmsprop" is the optimizer with the exact rules governing a specific use of gradient descent.
+network.compile(optimizer='rmsprop',
+                loss='categorical_crossentropy',
+                metrics=['accuracy'])
 
