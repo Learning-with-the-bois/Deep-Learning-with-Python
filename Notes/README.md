@@ -249,3 +249,5 @@ Once the architecture is defined, you will have to choose 2 more things:
 
 * **Loss function:** Quantity that will be minimized during training. Measure of success of the task.
 * **Optimizer:** Determines howthe networkwill be updated based on the loss function. Implements a specific variant of [stochastic gradient descent](#stochastic-gradient-descent).
+
+A neural network with multiple outputs may have multiple loss functions (one per output). But the gradient-descent process **must** be based on a **single** scalar loss value (For multiloss networks, all loses are combined vie averaging into a single scalar).
