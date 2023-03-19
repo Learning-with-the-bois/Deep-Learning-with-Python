@@ -119,7 +119,7 @@ z=np.dot(x,y)
 
 To understand dot-product shape compatibility, it helps to visualize the input and output tensors by aligning them.
 
-![1678416608774](image\Notes\1678416608774.png)
+![1678416608774](image/Notes/1678416608774.png)
 
 ### Tensor reshaping
 
@@ -167,7 +167,7 @@ The derivative of `f` in the point `W` is a tensor `gradient(f)(W)`, where each 
 
 You can reduce the value of `f(W)` by moving `W` in the opposite direction from the gradient. For example, `W1 = W0 - step * gradient(f)(W0)` (where `step` is a small scaling factor).
 
-![1679175493660](image\Notes\1679175493660.png)
+![1679175493660](image/Notes/1679175493660.png)
 
 ### Stochastic gradient descent
 
@@ -203,8 +203,6 @@ while loss > 0.01: # Optimization loop
 
 Starts with the final loss value and works backward from thetop layers to the botton layers, applying the *chain rule* to compute the contribution that each parameter had in the loss value.
 
-
-
 # 3. Getting started with neural networks
 
 ## 3.1 Anatomy of a neural network
@@ -216,7 +214,7 @@ Training a neural network revolves around:
 * The **loss function**, which defines the feedback signal used for learning.
 * The **optimizer**, which dtermines how learning proceeds
 
-![1679189190342](image\Notes\1679189190342.png)
+![1679189190342](image/Notes/1679189190342.png)
 
 ### Layers
 
