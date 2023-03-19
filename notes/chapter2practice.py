@@ -14,3 +14,9 @@ test_images = test_images.astype('float32') / 255
 from keras import models
 from keras import layers
 
+network = models.Sequential()
+# The networkconsits of a chain of two Dense layers,each one with itsown weights
+# W0, with relu activation function and a input shape of 28*28
+network.add(layers.Dense(512, activation='relu',input_shape=(28*28,)))
+# W1,with softmax activation function. Output of vector of 10 probability scores
+network.add(layers.Dense(10,activation='softmax'))
